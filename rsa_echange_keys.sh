@@ -1,11 +1,23 @@
 #!/bin/bash
- 
+
+# input variable 
+
 BACKUPUSER=$1
 PC_TARGET=$2
 port_ssh=$3
 password=$4
-#Configuring the ssh connection.
-#We need to send the rsa key to the remote account
+
+# vérification des entrées
+if [[ $# -eq 0 ]] ; then
+    echo 'remote user'
+    read BACKUPUSER
+    echo 'ip distante'
+    read PC_TARGET
+    echo 'port ssh (defaut 22)'
+    read port_ssh
+    echo 'mot de passe'
+    read password
+fi
 sshpass -p $password ssh -p $3 $BACKUPUSER@$PC_TARGET 'test -d $HOME/.ssh'
 R=$?
 
